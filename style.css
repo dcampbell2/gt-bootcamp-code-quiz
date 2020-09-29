@@ -1,0 +1,16 @@
+/* #timer{
+    float: right;
+} */
+
+h1{
+    text-align: center;
+}
+
+#answers{
+    text-align: center;
+    justify-content: center;
+}
+
+button{
+    float: left;
+}
