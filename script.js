@@ -1,15 +1,16 @@
 // grab elements from HTMl
 
-var hihghscoresEl = document.getElementById("highscores")
-var timerEl = document.getElementById("timer")
-var questionsEl = document.getElementById("questions")
-var answersEl = document.getElementById("answers")
-var startBtnEl = document.getElementById("start-button")
-var questionsDiv = document.querySelector(".hide")
-// var answerTwoBtn = document.getElementById("answer-two")
-// var answerThreeBtn = document.getElementById("answer-three")
-// var answerFourBtn = document.getElementById("answer-four")
-
+var hihghscoresEl = document.getElementById("highscores");
+var timerEl = document.getElementById("timer");
+var questionsEl = document.getElementById("questions");
+var answersEl = document.getElementById("answers");
+var startBtnEl = document.getElementById("start-button");
+var questionsDiv = document.querySelector(".hide");
+var quizDiv = document.querySelector(".quiz-div");
+var answerOneBtn = document.querySelector(".choice1");
+var answerTwoBtn = document.querySelector(".choice2");
+var answerThreeBtn = document.querySelector(".choice3");
+var answerFourBtn = document.querySelector(".choice4");
 
 // submitBtnEl.setAttribute("class", "btn btn-primary")
 
@@ -17,61 +18,80 @@ var questionsDiv = document.querySelector(".hide")
 
 var buttonsEl = document.querySelectorAll(".btn");
 for (var i = 0; i < buttonsEl.length; i++) {
-    buttonsEl[i].setAttribute("class", "btn btn-primary");
+  buttonsEl[i].setAttribute("class", "btn btn-primary");
 }
-
 
 //array of objects with questions
 
 var questions = [
-    {
-        question: "Test question1",
-        choices: [
-            "answerOne",
-            "answerTwo",
-            "answerThree",
-            "answerFour"
-        ],
-            answer: "answerOne"
-    },
+  {
+    question: "Test question1",
+    choices: ["answerOne", "answerTwo", "answerThree", "answerFour"],
+    answer: "answerOne",
+  },
 
-    {
-        question: "Test question2",
-        choices: [
-            "answerOne",
-            "answerTwo",
-            "answerThree",
-            "answerFour"
-        ],
-            answer: "answerTwo"
-    }
-
-]
+  {
+    question: "Test question2",
+    choices: ["answerOne", "answerTwo", "answerThree", "answerFour"],
+    answer: "answerTwo",
+  },
+];
 
 // console.log(questions);
 
-var questionsIndex = questions.length -1;
+var questionsIndex = questions.length - 1;
 
 var runningCurrentQuestion = 0;
 
-function startQuiz(){
-    questionsDiv.style.display = "none"
+var timerSeconds = 0;
+
+var interval;
+
+quizDiv.style.display = "none";
+
+function startQuiz() {
+  questionsDiv.style.display = "none";
+  interval = setInterval(function(){
+      timerSeconds--;
+      var secondsLeft = Math.floor(timerSeconds / 75)
+      timerEl.textContent = "Timer: " + secondsLeft
+  })
 }
 
-function renderQuestion(){
-    var currentQuestion = questions[runningCurrentQuestion];
+function renderQuestion() {
+  quizDiv.style.display = "block";
 
-    var choiceButton = document.createElement("button")
-    
-    questionsEl.textContent = currentQuestion.question
+  var currentQuestion = questions[runningCurrentQuestion];
 
+  questionsEl.textContent = currentQuestion.question;
 
-    questionsDiv.appendChild.questionsEl
-    
+  answerOneBtn.textContent = currentQuestion.choices[0];
 
-    console.log(questionsEl)
+  answerTwoBtn.textContent = currentQuestion.choices[1];
+
+  answerThreeBtn.textContent = currentQuestion.choices[2];
+
+  answerFourBtn.textContent = currentQuestion.choices[3];
+
+  quizDiv.appendChild.questionsEl;
+
+  console.log(questionsEl);
 }
 
-startBtnEl.addEventListener("click", startQuiz)
+// function for answer check
 
-// startBtnEl.addEventListener("click", renderQuestion)
+function answerCheck(event){
+    if(questions[runningCurrentQuestion].choices !== questions[runningCurrentQuestion].answer){
+        alert("wrong")
+        renderQuestion(runningCurrentQuestion++);
+    }else{
+        alert("correct")
+        renderQuestion(runningCurrentQuestion++)
+    }
+}
+
+startBtnEl.addEventListener("click", startQuiz);
+
+startBtnEl.addEventListener("click", renderQuestion);
+
+answerOneBtn.addEventListener("click", answerCheck)
