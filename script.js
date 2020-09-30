@@ -11,10 +11,9 @@ var answerOneBtn = document.querySelector(".choice1");
 var answerTwoBtn = document.querySelector(".choice2");
 var answerThreeBtn = document.querySelector(".choice3");
 var answerFourBtn = document.querySelector(".choice4");
+var answerStatusEl = document.getElementById("answer-status");
 
-// submitBtnEl.setAttribute("class", "btn btn-primary")
-
-// submitBtnEl.setAttribute("class", "btn btn-primary")
+// global for loop to add bootstrap styling for all buttons that get generated
 
 var buttonsEl = document.querySelectorAll(".btn");
 for (var i = 0; i < buttonsEl.length; i++) {
@@ -25,15 +24,50 @@ for (var i = 0; i < buttonsEl.length; i++) {
 
 var questions = [
   {
-    question: "Test question1",
-    choices: ["answerOne", "answerTwo", "answerThree", "answerFour"],
-    answer: "answerOne",
+    question: "Commonly used data types DO NOT include:",
+    choices: ["1. Strings", "2. Booleans", "3. alerts", "4. numbers"],
+    answer: "3. alerts",
   },
 
   {
-    question: "Test question2",
-    choices: ["answerOne", "answerTwo", "answerThree", "answerFour"],
-    answer: "answerTwo",
+    question:
+      "The condition in an if/else statement is enclosed within _______.",
+    choices: [
+      "1. Quotes",
+      "2. Curly Brackets",
+      "3. Parentheses",
+      "4. Square Brackets",
+    ],
+    answer: "3. Parentheses",
+  },
+  {
+    question: "Arrays in Javascript can be used to store _______.",
+    choices: [
+      "1. Numbers and Strings",
+      "2. Other Arrays",
+      "3. Booleans",
+      "4. All of the above",
+    ],
+    answer: "4. All of the above",
+  },
+
+  {
+    question:
+      "String values must be enclosed within ______ when being assigned to variables.",
+    choices: ["1. Commas", "2. Curly Brackets", "3. Quotes", "4. Parentheses"],
+    answer: "3. Quotes",
+  },
+
+  {
+    question:
+      "A very useful tool used during development and debugging for printing content to the debugger is:",
+    choices: [
+      "1. JavaScript",
+      "2. Terminal/Bash",
+      "3. For Loops",
+      "4. Console.log",
+    ],
+    answer: "4. Console.log",
   },
 ];
 
@@ -43,7 +77,7 @@ var questionsIndex = questions.length - 1;
 
 var runningCurrentQuestion = 0;
 
-var timerSeconds = 0;
+var timerSeconds = 75;
 
 var interval;
 
@@ -51,11 +85,10 @@ quizDiv.style.display = "none";
 
 function startQuiz() {
   questionsDiv.style.display = "none";
-  interval = setInterval(function(){
-      timerSeconds--;
-      var secondsLeft = Math.floor(timerSeconds / 75)
-      timerEl.textContent = "Timer: " + secondsLeft
-  })
+  interval = setInterval(function () {
+    timerSeconds--;
+    var secondsLeft = (timerEl.textContent = "Timer: " + timerSeconds);
+  }, 1000);
 }
 
 function renderQuestion() {
@@ -80,18 +113,21 @@ function renderQuestion() {
 
 // function for answer check
 
-function answerCheck(event){
-    if(questions[runningCurrentQuestion].choices !== questions[runningCurrentQuestion].answer){
-        alert("wrong")
-        renderQuestion(runningCurrentQuestion++);
-    }else{
-        alert("correct")
-        renderQuestion(runningCurrentQuestion++)
-    }
+function answerCheck(event) {
+  if (
+    questions[runningCurrentQuestion].choices !==
+    questions[runningCurrentQuestion].answer
+  ) {
+    alert("wrong")
+    renderQuestion(runningCurrentQuestion++);
+  } else {
+    alert("correct");
+    renderQuestion(runningCurrentQuestion++);
+  }
 }
 
 startBtnEl.addEventListener("click", startQuiz);
 
 startBtnEl.addEventListener("click", renderQuestion);
 
-answerOneBtn.addEventListener("click", answerCheck)
+answerOneBtn.addEventListener("click", answerCheck);
