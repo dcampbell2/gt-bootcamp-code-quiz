@@ -14,3 +14,7 @@ h1{
 button{
     float: left;
 }
+
+#go-back{
+    color: white;
+}

@@ -87,9 +87,11 @@ function startQuiz() {
   questionsDiv.style.display = "none";
   interval = setInterval(function () {
     timerSeconds--;
-    var secondsLeft = (timerEl.textContent = "Timer: " + timerSeconds);
+    var secondsLeft = timerEl.textContent = "Timer: " + timerSeconds;
   }, 1000);
 }
+
+//function to populate questions on screen
 
 function renderQuestion() {
   quizDiv.style.display = "block";
@@ -131,3 +133,9 @@ startBtnEl.addEventListener("click", startQuiz);
 startBtnEl.addEventListener("click", renderQuestion);
 
 answerOneBtn.addEventListener("click", answerCheck);
+
+answerTwoBtn.addEventListener("click", answerCheck);
+
+answerThreeBtn.addEventListener("click", answerCheck);
+
+answerFourBtn.addEventListener("click", answerCheck);
